@@ -1,0 +1,125 @@
+.movie-grid {
+    display: grid;
+    /* 5~7개의 컬럼(포스터)을 화면 크기에 따라 유동적으로 배치 */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 20px; /* 포스터 사이 간격 */
+    padding: 20px;
+}
+
+.movie-card {
+    /* 카드 전체를 포스터 비율에 맞게 조정 */
+    cursor: pointer;
+}
+
+.poster-image {
+    width: 100%;
+    /* ⭐️ 포스터의 표준 비율 (약 2:3)을 유지하기 위해 높이 자동 조정 */
+    height: auto; 
+    border-radius: 4px; /* 둥근 모서리 */
+    object-fit: cover; /* 이미지가 잘리더라도 비율 유지 */
+}
+
+.movie-card h4 {
+    font-size: 14px;
+    margin-top: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 제목이 길면 ... 처리 */
+}
+
+body {
+    background-color: #1c1d1f; /* 거의 검은색에 가까운 어두운 회색 */
+    color: #f5f5f5; /* 글자색을 밝게 */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ⭐️ 앱 컨테이너 */
+.App {
+    min-height: 100vh;
+}
+
+/* ⭐️ 검색창(input) 스타일링 */
+input[type="text"] {
+    background-color: #2b2c2f; /* 배경보다 살짝 밝은 검색창 배경 */
+    color: #f5f5f5;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* ⭐️ 버튼 스타일링 */
+button {
+    background-color: #ff0558; /* 왓챠피디아의 상징색 (빨간색) */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #e0044b;
+}
+
+button:disabled {
+    background-color: #3e3f42;
+    cursor: not-allowed;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* 뒷 배경을 어둡게 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #1c1d1f; /* 배경색 유지 */
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto; /* 내용이 길어지면 스크롤 가능 */
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    color: #aaa;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* 상세 정보 컨테이너 (포스터와 정보 영역 배치) */
+.detail-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.detail-poster {
+    width: 200px;
+    height: auto;
+    border-radius: 4px;
+    flex-shrink: 0; /* 크기 고정 */
+}
+
+.info-area {
+    flex-grow: 1;
+    line-height: 1.6;
+}
