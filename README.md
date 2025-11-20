@@ -1,3 +1,9 @@
+
+🎬 WATCHAPEDIA 클론 프로젝트(NuPedia)
+
+영화 데이터베이스(OMDB API)를 활용하여, 사용자에게 영화 검색 및 상세 정보를 제공하는 웹 애플리케이션.
+React를 기반으로 구축되었으며, 모달 대신 라우팅을 사용한 상세 페이지 이동 기능 구현.
+
 🚀 주요 기능 및 특징
 
 반응형 라우팅 구현:
@@ -6,7 +12,7 @@
 
 레이어드 아키텍처:
 
-Presentation (컴포넌트), Service (비즈니스 로직), Data Access (Repository) 계층으로 분리하여 유지보수성과 테스트 용이성을 높였습니다.
+Presentation(컴포넌트), Service(비즈니스 로직), Data Access(Repository) 계층으로 분리하여 유지보수성과 테스트 용이성을 높였습니다.
 
 데이터 매핑:
 
