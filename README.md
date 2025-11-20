@@ -1,16 +1,27 @@
-# React + Vite
+🚀 주요 기능 및 특징
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+반응형 라우팅 구현:
 
-Currently, two official plugins are available:
+# 해시 기반 라우팅을 사용하여 메인(/), 검색 결과(/search), 상세 페이지(/detail/:imdbId) 간의 매끄러운 화면 전환 구현.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+레이어드 아키텍처:
 
-## React Compiler
+Presentation (컴포넌트), Service (비즈니스 로직), Data Access (Repository) 계층으로 분리하여 유지보수성과 테스트 용이성을 높였습니다.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+데이터 매핑:
 
-## Expanding the ESLint configuration
+외부 API (OMDB)에서 제공되는 PascalCase 형태의 데이터를 애플리케이션 내부 표준인 camelCase로 변환하는 데이터 매핑 로직을 Repository 계층에서 처리 예정.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+스크롤 가능한 영화 섹션:
+
+메인 페이지에서 인기 영화 장르별 목록을 좌우 스크롤 가능한 섹션으로 제공하여 영화 탐색.
+
+🛠️ 기술 스택 (Tech Stack)
+
+Frontend Framework: React
+
+Styling: CSS
+
+API Service: Axios
+
+Architecture: Layered Architecture (Repository Pattern)
