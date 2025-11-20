@@ -1,0 +1,93 @@
+/* App.css 또는 스타일 파일에 추가 */
+.movie-section-container {
+    padding: 20px 0;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.section-title {
+    color: #f5f5f5;
+    margin-left: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.movie-list-scroll {
+    /* 플렉스 컨테이너로 설정 */
+    display: flex;
+    /* 가로 스크롤 허용 및 세로 잘라내기 */
+    overflow-x: auto; 
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    padding: 10px 0; /* 좌우 패딩 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Chrome, Safari 등 웹킷 기반 브라우저에서 스크롤바 숨기기 */
+.movie-list-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-item {
+    width: calc(20% - 16px);
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.movie-list-scroll .scroll-item:last-child {
+    margin-right: 0px;
+}
+
+.scroll-wrapper {
+    position: relative;
+}
+
+.scroll-button {
+    position: absolute;
+    top: 50%; /* 컨테이너 중앙에 배치 */
+    transform: translateY(-50%); /* 정확히 가운데 정렬 */
+    background-color: rgba(0, 0, 0, 0.6); /* 반투명 배경 */
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* 원형 버튼 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s, opacity 0.2s;
+    opacity: 0.8; 
+}
+
+.scroll-button:hover {
+    opacity: 1; 
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.left-button {
+    left: 20px; /* 좌측 패딩 위치 */
+}
+
+.right-button {
+    right: 20px; /* 우측 패딩 위치 */
+}
+
+@media (max-width: 1200px) {
+    .scroll-item {
+        width: calc(25% - 15px);
+    }
+}
+
+@media (max-width: 800px) {
+    .scroll-item {
+        width: calc(33.33% - 13.33%);
+    }
+    .scroll-button {
+        width:30px;
+        height:30px;
+    }
+}

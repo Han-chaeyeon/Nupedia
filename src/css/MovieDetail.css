@@ -1,0 +1,87 @@
+.detail-page-container {
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    color: #f5f5f5;
+    background-color: #141414;
+}
+
+.detail-back-button {
+    margin-bottom: 20px;
+    padding: 8px 15px;
+    border-radius: 6px;
+    border: none;
+    background-color: #3e3f42;
+    color: #f5f5f5;
+    cursor: pointer;
+    font-size: 0.9rem;
+    /* Tailwind CSS 클래스 대체 (hover:bg-gray-700) */
+    transition: background-color 0.15s ease-in-out;
+}
+
+.detail-back-button:hover {
+    background-color: #555;
+}
+
+.detail-content-wrapper {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.detail-poster {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    max-width: 100%;
+    min-width: 200px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.detail-info-area {
+    flex-grow: 1;
+    min-width: 300px;
+}
+
+.detail-title {
+    color: #ff0558;
+    font-size: 2.5em;
+    margin: 0 0 10px 0;
+}
+
+.detail-subtitle {
+    color: #aaa;
+    margin: 0 0 20px 0;
+    font-size: 1.2em;
+}
+
+.detail-rating-divider {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #3e3f42;
+}
+
+.detail-rating-star {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.detail-rating-meta {
+    color: #00ff7f;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .detail-content-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .detail-poster {
+        width: 80%; /* 모바일에서 포스터 크기 조정 */
+        max-width: 350px;
+    }
+}

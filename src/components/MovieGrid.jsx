@@ -19,7 +19,7 @@ function MovieGrid({ movies, onMovieSelect }) {
                     <MovieCard 
                         key={movie.imdbId} 
                         movie={movie} 
-                        onSelect={onMovieSelect} // MovieCard 클릭 이벤트를 부모(MoviePage)로 전달
+                        onMovieSelect={onMovieSelect} // MovieCard 클릭 이벤트를 부모(MoviePage)로 전달
                     />
                 ))}
             </div>

@@ -70,6 +70,7 @@ export class OmdbMovieRepository extends MovieRepository {
                 },
             });
             return response.data; 
+
         } catch (error) {
             console.error("[Repository Error]", error);
             return { Response: "False", Error: "네트워크 오류 또는 ID 조회 실패" };

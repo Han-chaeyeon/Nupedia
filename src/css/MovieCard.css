@@ -1,0 +1,38 @@
+/* MovieCard의 최상위 div 스타일 */
+.movie-card-content {
+    cursor: pointer; 
+    text-align: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #1c1d1f;
+}
+
+/* 포스터 이미지 스타일 */
+.poster-image {
+    width: 100%; 
+    display: block;
+    aspect-ratio: 2/3;
+    object-fit: cover; 
+}
+
+/* 텍스트 영역 */
+.card-text-area {
+    padding: 10px;
+}
+
+/* 영화 제목 스타일 */
+.card-title {
+    margin: 0 0 5px 0;
+    font-size: 0.95em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 연도 스타일 */
+.card-year {
+    margin: 0;
+    font-size: 0.95em;
+    color: #666;
+}

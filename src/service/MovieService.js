@@ -30,9 +30,12 @@ export class MovieService {
         };
     }
 
-    // 목록 검색 기능을 제공하는 Faca-de 메서드
-    async searchMovieCollection(query) {
-        const rawData = await this.repo.searchMovies(query);
+    // 목록 검색 기능을 제공하는 Facade 메서드
+    async searchMovieCollection(query, page=1) {
+        const defaultQuery = 'popular';
+        const finalQuery = query && query.trim() !== '' ? query : defaultQuery;
+
+        const rawData = await this.repo.searchMovies(finalQuery, page);
         
         if (rawData.Response === "False") {
             return { error: rawData.Error, movies: [] };
@@ -61,7 +64,7 @@ export class MovieService {
             return { error: rawData.Error || "상세 정보를 찾을 수 없습니다." };
         }
 
-        // 상세 정보에 장르가 포함되어 있으므로, UI에 맞게 가공합니다.
+        // 상세 정보에 장르가 포함되어 있으므로 UI에 맞게 가공
         return {
             id: rawData.imdbID,
             title: rawData.Title,
