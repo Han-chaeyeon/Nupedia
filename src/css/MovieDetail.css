@@ -1,87 +1,400 @@
+/* -------------------------------------------------- */
+/* 1. Base Setup and Container Styling (DARK MODE) */
+/* -------------------------------------------------- */
+
 .detail-page-container {
-    padding: 40px;
-    max-width: 1000px;
+    max-width: 100%;
     margin: 0 auto;
-    color: #f5f5f5;
-    background-color: #141414;
+    padding: 0;
+    /* ⭐️ 변경: 다크 모드 배경색 */
+    background-color: #121212; 
+    font-family: 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    color: #E0E0E0;
+    line-height: 1.6;
+}
+/* -------------------------------------------------- */
+/* 1.1 Navigation Bar (새로 추가) */
+/* -------------------------------------------------- */
+
+.detail-navbar {
+    display: flex; /* 자식 요소들을 가로로 정렬 */
+    align-items: center; /* 자식 요소들을 세로 중앙 정렬 */
+    justify-content: space-between; /* 양 끝 정렬 (필요시 사용) */
+    padding: 10px 20px;
+    background-color: #1a1a1a; /* 어두운 배경색 */
+    border-bottom: 1px solid #333;
+    width: 100%; /* 너비를 꽉 채우도록 설정 */
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
 }
 
-.detail-back-button {
-    margin-bottom: 20px;
-    padding: 8px 15px;
-    border-radius: 6px;
+.nav-button {
+    background: none;
     border: none;
-    background-color: #3e3f42;
-    color: #f5f5f5;
+    color: #fff;
     cursor: pointer;
-    font-size: 0.9rem;
-    /* Tailwind CSS 클래스 대체 (hover:bg-gray-700) */
-    transition: background-color 0.15s ease-in-out;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* 아이콘과 텍스트 사이 간격 */
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
 }
 
-.detail-back-button:hover {
-    background-color: #555;
+.nav-button:hover {
+    background-color: #333;
 }
 
+.nav-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* 검색 폼 스타일 */
+.detail-search-inline-form {
+    display: flex; /* 입력창과 버튼을 가로로 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    flex-grow: 1; /* 남은 공간을 채우도록 확장 */
+    margin-left: 20px; /* 뒤로가기 버튼과의 간격 */
+    max-width: 400px; /* 너무 길어지지 않도록 최대 너비 설정 (조정 가능) */
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden; /* 자식 요소의 모서리 둥글게 처리 */
+}
+
+.detail-search-inline-input {
+    flex-grow: 1; /* 남은 공간을 최대한 차지 */
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    color: #fff;
+    font-size: 16px;
+    outline: none; /* 포커스 시 아웃라인 제거 */
+}
+
+.detail-search-inline-input::placeholder {
+    color: #bbb;
+}
+
+.search-submit-button {
+    background-color: #555; /* 검색 버튼 배경색 */
+    border-radius: 0 5px 5px 0; /* 우측만 둥글게 */
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.search-submit-button:hover {
+    background-color: #777;
+}
+
+.search-submit-button svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+}
+
+/* -------------------------------------------------- */
+/* 2. Hero Section (배경 이미지 + 정보) - 왓챠피디아 핵심 디자인 */
+/* -------------------------------------------------- */
+
+.detail-hero {
+    position: relative;
+    width: 100%;
+    height: 600px; /* PC 환경에서 높이 */
+    padding-top: 60px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* 이미지 가독성을 위한 어두운 오버레이 */
+.detail-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to top, 
+        rgba(0, 0, 0, 0.9) 0%, /* 하단은 매우 어둡게 */
+        rgba(0, 0, 0, 0.7) 40%, 
+        rgba(0, 0, 0, 0.1) 100% /* 상단은 밝게 */
+    );
+    z-index: 1;
+}
+
+/* 정보를 담는 내부 컨테이너 (포스터 + 텍스트) */
 .detail-content-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     gap: 40px;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: flex-end; /* 포스터와 정보를 아래에 정렬 */
+    z-index: 2;
+}
+
+/* 2.1 Poster */
+.detail-poster-wrapper {
+    flex-shrink: 0;
+    width: 200px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* 그림자 강화 */
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 .detail-poster {
-    width: 300px;
-    height: auto;
-    border-radius: 8px;
-    max-width: 100%;
-    min-width: 200px;
+    width: 100%;
+    height: 300px;
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    display: block;
 }
 
+/* 2.2 Info Area */
 .detail-info-area {
     flex-grow: 1;
-    min-width: 300px;
+    color: #FFFFFF; /* 흰색 텍스트 유지 */
+    padding-bottom: 20px; 
 }
 
 .detail-title {
-    color: #ff0558;
-    font-size: 2.5em;
+    font-size: 3rem;
+    font-weight: 800;
     margin: 0 0 10px 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
 }
 
 .detail-subtitle {
-    color: #aaa;
-    margin: 0 0 20px 0;
-    font-size: 1.2em;
+    font-size: 1.1rem;
+    color: #B0B0B0;
+    margin: 0 0 5px 0;
 }
 
-.detail-rating-divider {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #3e3f42;
+.rating-summary {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #FFD700; /* 금색 평점 강조 */
+    margin-top: 15px;
 }
 
-.detail-rating-star {
-    color: #ffd700;
-    font-weight: bold;
+/* -------------------------------------------------- */
+/* 3. Action Bar (평가하기, 보고싶어요 버튼) */
+/* -------------------------------------------------- */
+
+.detail-action-bar {
+    width: 100%;
+    margin-top: 15px;
 }
 
-.detail-rating-meta {
-    color: #00ff7f;
+.action-button-group {
+    display: flex;
+    gap: 10px;
 }
 
-/* 반응형 디자인 */
+.action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    /* ⭐️ 변경: 다크 모드 버튼 테두리 */
+    border: 1px solid #333333; 
+    /* ⭐️ 변경: 다크 모드 버튼 배경 */
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+}
+
+.action-button svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+}
+
+.action-button:hover {
+    background-color: #2A2A2A; 
+}
+
+.rate-star {
+    background-color: #FF0558; 
+    border-color: #FF0558;
+}
+
+.rate-star:hover {
+    background-color: #e5044f;
+}
+
+/* -------------------------------------------------- */
+/* 4. Body Section (줄거리, 상세 정보) */
+/* -------------------------------------------------- */
+
+.detail-body-wrapper {
+    max-width: 900px;
+    margin: 40px auto 60px auto; /* PC에서 중앙에 배치 */
+    padding: 0 20px;
+}
+
+.detail-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #F0F0F0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #333333; 
+    padding-bottom: 5px;
+}
+
+.section-content {
+    font-size: 1rem;
+    color: #C0C0C0;
+    margin: 0;
+}
+
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+}
+
+.staff-item {
+    padding: 10px 0;
+}
+
+.staff-role {
+    font-size: 0.85rem;
+    /* ⭐️ 변경: 역할(Role) 텍스트 색상 */
+    color: #888888;
+    margin-bottom: 3px;
+}
+
+.staff-name {
+    font-size: 1rem;
+    font-weight: 600;
+    /* ⭐️ 변경: 인물 이름 텍스트 색상 */
+    color: #E0E0E0;
+}
+
+.ratings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.rating-item {
+    padding: 15px;
+    border: 1px solid #333333; 
+    border-radius: 8px;
+    background-color: #1e1e1e; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.rating-item.summary-item {
+    background-color: #2a2a2a; 
+    border-color: #444444;
+}
+
+.rating-source {
+    font-size: 0.9rem;
+    color: #888888; 
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.rating-value-display {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #FFFFFF; 
+}
+
+
+/* -------------------------------------------------- */
+/* 5. Responsive Design (모바일 환경, 768px 이하) */
+/* -------------------------------------------------- */
+
 @media (max-width: 768px) {
+    
+    /* 히어로 섹션 높이 축소 */
+    .detail-hero {
+        height: 450px; 
+    }
+    
     .detail-content-wrapper {
         flex-direction: column;
         align-items: center;
+        text-align: center;
+        padding: 20px 15px;
         gap: 20px;
     }
 
+    /* 포스터 크기 조정 */
+    .detail-poster-wrapper {
+        width: 150px;
+    }
     .detail-poster {
-        width: 80%; /* 모바일에서 포스터 크기 조정 */
-        max-width: 350px;
+        height: 225px;
+    }
+
+    /* 정보 영역 텍스트 조정 */
+    .detail-info-area {
+        width: 100%;
+        padding-bottom: 0;
+    }
+    
+    .detail-title {
+        font-size: 2rem;
+        margin-top: 10px;
+    }
+
+    .detail-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .rating-summary {
+        font-size: 1.1rem;
+    }
+
+    /* 액션 버튼 수직 배열 */
+    .action-button-group {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 15px;
+    }
+    
+    .action-button {
+        flex: 1 1 auto; /* 버튼이 유연하게 늘어나도록 */
+        padding: 8px 10px;
+    }
+    
+    .detail-body-wrapper {
+        margin: 30px auto;
+        padding: 0 15px;
+        max-width: 100%;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .staff-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
 }

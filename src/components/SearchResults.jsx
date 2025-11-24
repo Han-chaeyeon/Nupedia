@@ -12,7 +12,7 @@ const SearchResults = ({
     totalResults,
     currentPage,
     totalPages,
-    handlePageChange,
+    onPageChange,
     onMovieSelect 
 }) => {
     // 1. 결과가 있고, 검색은 완료되었을 때 (검색 결과 및 페이지네이션)
@@ -32,7 +32,7 @@ const SearchResults = ({
                 {totalPages > 1 && (
                     <div style={{ textAlign: 'center', margin: '20px 0' }}>
                         <button 
-                            onClick={() => handlePageChange(currentPage - 1)} 
+                            onClick={() => onPageChange(currentPage - 1)} 
                             disabled={currentPage === 1}
                             style={{ padding: '8px 16px', margin: '0 5px', borderRadius: '5px', backgroundColor: '#333', color: '#fff', border: 'none', cursor: 'pointer' }}
                         >
@@ -42,7 +42,7 @@ const SearchResults = ({
                             페이지 {currentPage} / {totalPages}
                         </span>
                         <button 
-                            onClick={() => handlePageChange(currentPage + 1)} 
+                            onClick={() => onPageChange(currentPage + 1)} 
                             disabled={currentPage >= totalPages}
                             style={{ padding: '8px 16px', margin: '0 5px', borderRadius: '5px', backgroundColor: '#333', color: '#fff', border: 'none', cursor: 'pointer' }}
                         >

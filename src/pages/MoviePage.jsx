@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
-import MovieSearchUI from '../components/MovieSearchUI';
+import React, { useEffect, useState } from 'react';
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import MovieDetailModal from '../components/MovieDetailModal';
 import HomePage from './HomePage';
 import SearchResults from '../components/SearchResults';
 
-function MoviePage({ movieService, onMovieSelect }) {
+function MoviePage({ movieService, onMovieSelect, initialSearchQuery }) {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState(''); //  현재 검색어 저장
     const [currentPage, setCurrentPage] = useState(1);   //  현재 페이지 상태
     const [totalResults, setTotalResults] = useState(0);//  총 결과 수 상태
-
 
     // 검색 실행 함수
     const fetchMovies = async (query, page) => {
@@ -36,13 +33,15 @@ function MoviePage({ movieService, onMovieSelect }) {
             setLoading(false);
         }
     };
-    
-    // 검색어 입력 시 (항상 1페이지부터 시작)
-    const handleSearch = (query) => {
-        setSearchQuery(query);
-        setCurrentPage(1);
-        fetchMovies(query, 1);
-    };
+
+    useEffect(() => {
+    // App에서 받은 초기 검색어(또는 전역 검색어)가 있다면 검색 실행
+    if (initialSearchQuery && initialSearchQuery !== searchQuery) {
+      setSearchQuery(initialSearchQuery);
+      setCurrentPage(1);
+      fetchMovies(initialSearchQuery, 1);
+    }
+  }, [initialSearchQuery]); // initialSearchQuery가 변경될 때마다 실행
 
     
     // 상세 정보 조회 로직 (MovieCard 클릭 시)
@@ -62,34 +61,41 @@ function MoviePage({ movieService, onMovieSelect }) {
     // 페이지네이션 UI 추가
     const totalPages = Math.ceil(totalResults / 10);
 
-    return (
-        <div style={{ padding: '20px' }}>
-            {/* 1. 검색 UI 컴포넌트 */}
-            <MovieSearchUI onSearch={handleSearch} />
-            {/* 2. 상태 표시 */}
-            {loading && <LoadingSpinner />}
+   return (
+    <div style={{ padding: '20px' }}>
+            <>
+                {/* 3. 로딩 상태 표시 */}
+                {loading && <LoadingSpinner />}
+                {searchQuery && !loading && !error && movies.length === 0 && (
+                    <div style={{ textAlign: 'center', color: '#666', marginTop: '20px', padding: '15px', border: '1px solid #ddd', borderRadius: '8px' }}>
+                        <p>'{searchQuery}'에 대한 검색 결과가 없습니다. 다른 검색어로 시도해 보세요.</p>
+                    </div>
+                )}
 
-            {/* 3. 장르별 섹션 (검색어가 비어있고, 현재 검색 로딩 중이 아닐 때만) */}
-            {!searchQuery && !loading && (
-                <HomePage movieService={movieService} onMovieSelect={handleCardClick}/>
-            )}
-            
-            {/* 4. 검색 결과 그리드 (searchQuery가 있을 때만) */}
+                {searchQuery && !loading && error && (
+                    <div style={{ textAlign: 'center', color: 'red', marginTop: '20px', padding: '15px', backgroundColor: '#fee2e2', borderRadius: '8px' }}>
+                        <p>검색 중 오류가 발생했습니다: {error}</p>
+                    </div>
+                )}
+                {/* 4. 장르별 섹션 (검색어가 비어있고 로딩 중이 아닐 때) */}
+                {!searchQuery && !loading && (
+                    <HomePage movieService={movieService} onMovieSelect={handleCardClick}/>
+                )}
+                
+                {/* 5. 검색 결과 그리드 (searchQuery가 있을 때) */}
                 {searchQuery && (
                     <SearchResults
                         movies={movies}
                         searchQuery={searchQuery}
-                        loading={loading}
-                        totalResults={totalResults}
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        handlePageChange={handlePageChange}
                         onMovieSelect={handleCardClick}
+                        totalPages={totalPages}
+                        currentPage={currentPage}
+                        onPageChange={handlePageChange}
                     />
                 )}
-        </div>
-        
-    );
+            </>
+    </div>
+);
 }
 
 export default MoviePage;

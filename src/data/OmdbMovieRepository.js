@@ -69,7 +69,31 @@ export class OmdbMovieRepository extends MovieRepository {
                     plot: 'full' 
                 },
             });
-            return response.data; 
+            const rawData = response.data;
+
+            // 상세페이지 정보를 위한 매핑
+            const mappedData = {
+                imdbId: rawData.imdbID,
+                title: rawData.Title,
+                year: rawData.Year,
+                posterUrl: rawData.Poster !== 'N/A' ? rawData.Poster : null,
+
+                plot: rawData.Plot,
+                runtime: rawData.Runtime,
+                actors: rawData.Actors,
+                director: rawData.Director,
+                genre: rawData.Genre,
+                country: rawData.Country,
+                language: rawData.Language,
+
+                imdbRating: rawData.imdbRating,
+                imdbVotes: rawData.imdbVotes,
+                metascore: rawData.Metascore,
+                rated: rawData.Rated,
+                released: rawData.Released,
+            };
+
+            return {movie: mappedData, Response: "True"};
 
         } catch (error) {
             console.error("[Repository Error]", error);

@@ -6,7 +6,7 @@ export class MovieService {
         this.repo = MovieRepository;
     }
 
-    // UI 계층에 검색 기능 제공하는 faca-de 패턴 적용
+    // UI 계층에 검색 기능 제공하는 facade 패턴 적용
     async searchMoiveDetail(title) {
         console.log(`비즈니스 로직 처리 시작`);
 
@@ -58,22 +58,33 @@ export class MovieService {
     async getMovieDetailById(imdbId) {
         console.log(`[Service] ID 기반 상세 조회 시작: ${imdbId}`);
         
-        const rawData = await this.repo.getMovieById(imdbId);
+        const rawResponse = await this.repo.getMovieById(imdbId);
         
-        if (rawData.Response === "False") {
-            return { error: rawData.Error || "상세 정보를 찾을 수 없습니다." };
+        if (rawResponse.Response === "False") {
+            return { error: rawResponse.Error || "상세 정보를 찾을 수 없습니다." };
         }
+
+        const movieData = rawResponse.movie;
 
         // 상세 정보에 장르가 포함되어 있으므로 UI에 맞게 가공
         return {
-            id: rawData.imdbID,
-            title: rawData.Title,
-            year: rawData.Year,
-            director: rawData.Director,
-            rating: rawData.imdbRating,
-            posterUrl: rawData.Poster !== 'N/A' ? rawData.Poster : null,
-            plot: rawData.Plot,
-            genres: rawData.Genre.split(', ') // 쉼표로 구분된 장르를 배열로 변환
+            id: movieData.imdbId,
+            title: movieData.title,
+            year: movieData.year,
+            director: movieData.director,
+            rating: movieData.imdbRating,
+            posterUrl: movieData.posterUrl,
+            plot: movieData.plot,
+            genres: movieData.genre ? movieData.genre.split(', ') : [], // 쉼표로 구분된 장르를 배열로 변환
+            language: movieData.language,
+
+            runtime: movieData.runtime,
+            actors: movieData.actors,
+            country: movieData.country,
+            metascore: movieData.metascore,
+            imdbRating:movieData.imdbRating,
+            rated: movieData.rated,
+            released: movieData.released,
         };
     }
 }
