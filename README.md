@@ -1,16 +1,41 @@
-# React + Vite
+# 🎬 WATCHAPEDIA 프로젝트
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. 프로젝트 목표 및 개요
 
-Currently, two official plugins are available:
+목표: OMDB API 활용, 영화 검색 및 상세 정보 제공 웹 애플리케이션 구축.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+기반: React 사용.
 
-## React Compiler
+핵심: 모달 대신 라우팅을 사용한 상세 페이지 이동 기능 구현.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 2. 주요 기능 및 아키텍처 특징
 
-## Expanding the ESLint configuration
+라우팅: 해시(#) 기반 반응형 라우팅 구현 (/, /search, /detail/:imdbId).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+아키텍처: Layered Architecture (3계층) 분리.
+
+Presentation: UI 담당 (React 컴포넌트).
+
+Service: 핵심 비즈니스 로직 및 데이터 가공 담당.
+
+Repository: 외부 API 통신 및 데이터 매핑 전담. (API의 PascalCase 키를 앱 표준 camelCase로 변환 처리함.)
+
+UI: 스크롤 가능한 장르별 영화 섹션 제공.
+
+## 3. 기술 스택
+
+프론트엔드: React, CSS.
+
+데이터 통신: Axios.
+
+설계 패턴: Layered Architecture (Repository Pattern).
+
+## 4. 실행 요약
+
+클론: Repository 클론.
+
+설치: npm install 실행.
+
+API: OMDB 키 설정 (필수).
+
+실행: npm start로 로컬 실행.
