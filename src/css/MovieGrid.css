@@ -1,0 +1,10 @@
+.movie-grid-section {
+  padding: 20px 0;
+}
+
+.movie-grid-container {
+  display: flex;
+  flex-wrap: wrap; /* 화면 크기에 따라 자동으로 줄 바꿈 */
+  justify-content: center; /* 중앙 정렬 */
+  gap: 20px; /* 항목 간 간격 */
+}

@@ -2,193 +2,192 @@
 /* 1. 글로벌 스타일 및 다크 모드 테마 */
 /* ------------------------------------------- */
 body {
-    /* 아주 어두운 배경 */
-    background-color: #141414;
-    color: #f5f5f5;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
+  /* 아주 어두운 배경 */
+  background-color: #141414;
+  color: #f5f5f5;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
 }
 
 /* 메인 애플리케이션 컨테이너: 중앙 정렬 및 최대 너비 제한 */
 .App {
-    background-color: #141414;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 70px; /* 고정된 검색바를 위한 여백 */
-    overflow-x: hidden;
+  background-color: #141414;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
 }
 
 /* ------------------------------------------- */
 /* 2. 고정 검색 내비게이션 바 (search-nav-bar) */
 /* ------------------------------------------- */
 .search-nav-bar {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%); /* 화면 중앙 정렬 */
-    width: 100%;
-    max-width: 1400px;
-    background-color: #141414;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    z-index: 50;
-    padding: 10px 20px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* 화면 중앙 정렬 */
+  width: 100%;
+  max-width: 1400px;
+  background-color: #141414;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  padding: 10px 20px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 검색 폼 내부 스타일 */
 .search-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
 }
 
 .search-input-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .search-input-field {
-    flex-grow: 1; /* 남은 공간을 모두 차지 */
-    margin-right: 10px;
-    font-size: 16px;
-    padding: 10px 15px;
-    background-color: #2b2c2f; /* 어두운 입력 필드 배경 */
-    color: #f5f5f5;
-    border: 1px solid #3e3f42;
-    border-radius: 6px;
-    outline: none;
-    transition: border-color 0.2s;
+  flex-grow: 1; /* 남은 공간을 모두 차지 */
+  margin-right: 10px;
+  font-size: 16px;
+  padding: 10px 15px;
+  background-color: #2b2c2f; /* 어두운 입력 필드 배경 */
+  color: #f5f5f5;
+  border: 1px solid #3e3f42;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
 .search-input-field:focus {
-    border-color: #ff0558; /* 포커스 시 액센트 색상 */
+  border-color: #ff0558; /* 포커스 시 액센트 색상 */
 }
 
 .search-button {
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ff0558; /* 액센트 색상 */
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff0558; /* 액센트 색상 */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .search-button:hover {
-    background-color: #e0044b;
+  background-color: #e0044b;
 }
 
 .search-icon {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-    color: white;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  color: white;
 }
 
 /* ------------------------------------------- */
 /* 3. 콘텐츠 그리드 및 카드 스타일 */
 /* ------------------------------------------- */
 .movie-grid {
-    /* 반응형 그리드: 최소 180px 크기로 최대한 많이 채움 */
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-    padding: 20px;
+  /* 반응형 그리드: 최소 180px 크기로 최대한 많이 채움 */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 .movie-card {
-    cursor: pointer;
-    background-color: #1c1d1f;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  background-color: #1c1d1f;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .movie-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
 }
 
 .movie-card p {
-    color: #e5e7eb;
+  color: #e5e7eb;
 }
 
 /* ------------------------------------------- */
 /* 4. 모달 상세 보기 스타일 */
 /* ------------------------------------------- */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85); /* 더 진한 오버레이 */
-    display: none; /* 기본적으로 숨김 */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85); /* 더 진한 오버레이 */
+  display: none; /* 기본적으로 숨김 */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
-    background: #1c1d1f;
-    padding: 30px;
-    border-radius: 12px;
-    max-width: 900px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
+  background: #1c1d1f;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
 }
 
 .close-button {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: transparent;
-    color: #aaa;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  color: #aaa;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
 }
 
 .detail-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 20px;
 }
 
 /* 모바일 환경에서는 포스터와 정보가 세로로 쌓이도록 함 */
 @media (min-width: 768px) {
-    .detail-container {
-        flex-direction: row;
-    }
+  .detail-container {
+    flex-direction: row;
+  }
 }
 
 .detail-poster {
-    width: 100%; /* 모바일에서 전체 너비 */
-    max-width: 250px;
-    height: auto;
-    border-radius: 6px;
-    flex-shrink: 0;
+  width: 100%; /* 모바일에서 전체 너비 */
+  max-width: 250px;
+  height: auto;
+  border-radius: 6px;
+  flex-shrink: 0;
 }
 
 .info-area {
-    flex-grow: 1;
-    line-height: 1.6;
+  flex-grow: 1;
+  line-height: 1.6;
 }
