@@ -1,3 +1,9 @@
+/*
+    MovieDetailDTO.ts
+    영화 상세 정보를 위한 표준 DTO
+    - 데이터의 표준화(외부 API를 프론트엔드에서 사용하는 일관된 포맷으로 변환)
+    - 데이터 전송 컨테이너, 데이터 형태 문서화
+*/
 /**
  * @typedef {object} MovieDetailDto - 영화 상세 정보를 위한 내부 표준 DTO
  * @property {string} imdbId - IMDB 고유 ID.
@@ -15,5 +21,19 @@
  * @property {string} rated - 관람 등급 (예: "PG-13").
  * @property {string} released - 개봉일 (원시 문자열).
  */
-
-export class MovieDetailDto {}
+export interface MovieDetailDto {
+    imdbId: string;
+    title: string;
+    year: number;
+    posterUrl: string | null;
+    plot: string;
+    director: string;
+    runtime: string;
+    actors: string;
+    genre: string;
+    language: string;
+    country: string;
+    imdbRating: string;
+    rated: string;
+    released: string;
+}

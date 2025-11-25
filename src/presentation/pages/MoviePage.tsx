@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import LoadingSpinner from "../components/common/LoadingSpinner";
-import HomePage from "./HomePage";
-import SearchResults from "../components/SearchResults";
-import { useMovieService } from "../service/MovieServiceContext";
+import LoadingSpinner from "../components/common/LoadingSpinner.jsx";
+import HomePage from "./HomePage.js";
+import SearchResults from "../components/SearchResults.js";
+import { useMovieService } from "../../service/MovieServiceContext.jsx";
 import {
   DomainError,
   RepositoryError,

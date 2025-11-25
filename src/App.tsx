@@ -1,10 +1,10 @@
 import "./App.css";
-import { OmdbMovieRepository } from "./data/OmdbMovieRepository";
-import MovieSearchUI from "./components/MovieSearchUI";
-import { MovieService } from "./service/MovieService.js";
-import { OMDB_API_KEY } from "./config";
-import MoviePage from "./pages/MoviePage";
-import MovieDetail from "./components/MovieDetail";
+import { OmdbMovieRepository } from "./data/OmdbMovieRepository.js";
+import MovieSearchUI from "./presentation/components/MovieSearchUI.js";
+import { MovieService } from "./domain/movie/MovieService.js";
+import { OMDB_API_KEY } from "./config.js";
+import MoviePage from "./presentation/pages/MoviePage.js";
+import MovieDetail from "./presentation/components/MovieDetail.js";
 import { useEffect, useState } from "react";
 import { MovieServiceProvider } from "./service/MovieServiceContext.jsx";
 import { HashRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";

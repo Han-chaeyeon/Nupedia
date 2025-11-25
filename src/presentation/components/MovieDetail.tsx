@@ -1,5 +1,5 @@
 import "../css/MovieDetail.css";
-import useMovieDetail from "../hooks/useMovieDetail";
+import useMovieDetail from "../../hooks/useMovieDetail";
 import LoadingSpinner from "./common/LoadingSpinner";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

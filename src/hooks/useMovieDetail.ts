@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import {
   MovieNotFoundError,
   InvalidInputError,
-} from "../components/common/errors/DomainError";
+} from "../presentation/components/common/errors/DomainError.js";
 import { useMovieService } from "../service/MovieServiceContext.jsx";
 
 /**

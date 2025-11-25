@@ -1,10 +1,10 @@
 import axios from "axios";
 import { OMDB_BASE_URL } from "../config.js";
-import { MovieRepository } from "./interfaces/MovieRepository";
+import { MovieRepository } from "./interfaces/MovieRepository.js";
 import {
   MovieNotFoundError,
   RepositoryError,
-} from "../components/common/errors/DomainError.js";
+} from "../presentation/components/common/errors/DomainError.js";
 
 // API 호출용 레포지토리
 export class OmdbMovieRepository extends MovieRepository {

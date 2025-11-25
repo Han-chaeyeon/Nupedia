@@ -1,10 +1,10 @@
-import { MovieRepository } from "../data/interfaces/MovieRepository";
+import { MovieRepository } from "../../data/interfaces/MovieRepository.js";
 import {
   MovieNotFoundError,
   InvalidInputError,
   DomainError,
   RepositoryError,
-} from "../components/common/errors/DomainError.js";
+} from "../../presentation/components/common/errors/DomainError.js";
 
 // 실제 서비스가 의존해야하는 인터페이스
 export class MovieService {
