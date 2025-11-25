@@ -2,9 +2,10 @@ import "../css/MovieDetail.css";
 import useMovieDetail from "../hooks/useMovieDetail";
 import LoadingSpinner from "./common/LoadingSpinner";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 // 상세 정보 컴포넌트
-const MovieDetail = ({ imdbId, onGoBack, onSearchTrigger }) => {
+const MovieDetail = ({ onGoBack, onSearchTrigger }) => {
   // useMovieDetail 훅을 활용해 상세 정보 업로드
   const {
     selectedMovie: details,
@@ -14,6 +15,7 @@ const MovieDetail = ({ imdbId, onGoBack, onSearchTrigger }) => {
   } = useMovieDetail();
   const [searchTitle, setSearchTitle] = useState("");
   const [isDownloading, setIsDownloading] = useState(false);
+  const {imdbId} = useParams(); // app에서 imdbId 불러오기
 
   // 컴포넌트 마운트, imdbId 변경 시 상세 정보 조회 트리거
   useEffect(() => {

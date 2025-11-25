@@ -1,9 +1,5 @@
 // 영화 데이터 접근을 위한 레포지토리
 export class MovieRepository {
-  async getMovieBytitle(title) {
-    throw new Error("Method 'getMovieTitle()' must be implemented.");
-  }
-
   // 추가: ID 기반 상세 조회
   async getMovieById(imdbId) {
     throw new Error("Method 'getMovieById()' must be implemented.");

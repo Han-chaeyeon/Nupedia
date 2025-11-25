@@ -86,6 +86,7 @@ function MoviePage({ onMovieSelect, initialSearchQuery }) {
             </p>
           </div>
         )}
+        
 
         {searchQuery && !loading && error && (
           <div

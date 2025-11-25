@@ -7,6 +7,7 @@ import MoviePage from "./pages/MoviePage";
 import MovieDetail from "./components/MovieDetail";
 import { useEffect, useState } from "react";
 import { MovieServiceProvider } from "./service/MovieServiceContext.jsx";
+import { HashRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 // 의존성 컨테이너 주입
 const movieRepository = new OmdbMovieRepository(OMDB_API_KEY);
@@ -14,56 +15,26 @@ const movieService = new MovieService(movieRepository);
 
 function App() {
   // URL 추적
-  const [path, setPath] = useState(window.location.hash);
   const [currentSearchQuery, setCurrentSearchQuery] = useState("");
-  const isDetailView = path.startsWith("#/detail/");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isDetailView = location.pathname.startsWith("/detail/")
 
   // 라우팅 핸들러
   const handleMovieSelect = (imdbId) => {
-    window.location.hash = `#/detail/${imdbId}`;
+    navigate(`/detail/${imdbId}`);
   };
 
+  // 검색 트리거
   const handleGlobalSearch = (query) => {
     setCurrentSearchQuery(query); // 상태 저장
-    window.location.hash = "#/";
+    navigate('/');
   };
 
   // 홈으로 돌아가기
   const handleGoBack = () => {
     setCurrentSearchQuery("");
-    window.history.replaceState(null, "", "#/");
-    setPath("#/");
-  };
-
-  // 해시 변경 이벤트 리스너
-  useEffect(() => {
-    const handleHashChange = () => {
-      setPath(window.location.hash || "#/");
-    };
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
-
-  // 현재 경로에 따라 렌더링할 페이지 결정
-  const renderPage = () => {
-    if (path.startsWith("#/detail/")) {
-      const id = path.split("/").pop().split("?")[0];
-      return (
-        <MovieDetail
-          imdbId={id}
-          onGoBack={handleGoBack}
-          onSearchTrigger={handleGlobalSearch}
-        />
-      );
-    }
-
-    // 기본경로, 다른 경로는 moviePage 렌더링
-    return (
-      <MoviePage
-        onMovieSelect={handleMovieSelect}
-        initialSearchQuery={currentSearchQuery}
-      />
-    );
+    navigate("/", {replace:true})
   };
 
   return (
@@ -74,11 +45,34 @@ function App() {
             onSearch={handleGlobalSearch}
             initialQuery={currentSearchQuery}
           />
+          
         )}
-        <div className="content-container">{renderPage()}</div>
+        <div className="content-container">
+          <Routes>
+              {/* Home View: / 경로에 MoviePage 렌더링 */}
+            <Route 
+              path="/" 
+              element={<MoviePage onMovieSelect={handleMovieSelect} initialSearchQuery={currentSearchQuery} onClearSearch={handleGoBack} />} 
+            />
+
+            {/* Detail View: /detail/ 다음에 오는 값을 imdbId 파라미터로 정의 */}
+            <Route 
+              path="/detail/:imdbId" 
+              element={<MovieDetail onGoBack={handleGoBack} />} 
+            />
+          </Routes>
+        </div>
       </div>
     </MovieServiceProvider>
   );
 }
 
-export default App;
+const Root = () => {
+  return (
+  <HashRouter>
+    <App/>
+  </HashRouter>
+  )
+}
+
+export default Root;
