@@ -6,15 +6,15 @@
  */
 
 export interface MovieSummaryDTO {
-    movieId: string;
-    title: string;
-    year: number;
-    type: 'movie' | 'series' | 'episode';
-    posterUrl: string;
+  movieId: string;
+  title: string;
+  year: number;
+  type: "movie" | "series" | "episode";
+  posterUrl: string | null;
 }
 
 // 검색 응답 결과 전체 DTO
 export interface MovieSearchResultDTO {
-    movies: MovieSummaryDTO[];
-    totalResults: number;
+  movies: MovieSummaryDTO[];
+  totalResults: number;
 }

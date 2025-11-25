@@ -4,7 +4,7 @@ import { MovieRepository } from "./interfaces/MovieRepository.js";
 import {
   MovieNotFoundError,
   RepositoryError,
-} from "../presentation/components/common/errors/DomainError.js";
+} from "../common/errors/DomainError.js";
 
 // API 호출용 레포지토리
 export class OmdbMovieRepository extends MovieRepository {
@@ -76,7 +76,7 @@ export class OmdbMovieRepository extends MovieRepository {
             `ID ${imdbId} 에 해당하는 영화를 찾을 수 없습니다.`
           );
         }
-        throw new RepositoryError(`OMDb API 오류 : ${rawData.Error}`);
+        throw new RepositoryError(`OMDb API 오류 :`, rawData.Error);
       }
 
       // Mapping로직
