@@ -13,9 +13,10 @@ import {
   OmdbRawMovieDetailResponse,
   OmdbRawMovieSearchResponse,
   OmdbRawMovieSummary,
+  OmdbRawRating,
 } from "../../api/OmdbApiRawTypes";
 import { IMovieRepository } from "../../domain/movie/IMovieRepository";
-import { MovieDetailDTO } from "../../models/MovieDetailDTO";
+import { MovieDetailDTO, RatingDTO } from "../../models/MovieDetailDTO";
 import {
   MovieSearchResultDTO,
   MovieSummaryDTO,
@@ -131,7 +132,8 @@ export class MovieRepository implements IMovieRepository {
     }
   }
 
-  // 어댑터 함수 -> 애플리케이션 내부에서 사용할 수 있는 안정적인 표준 타입 보정
+  // 어댑터 함수: RawDTO -> 내부 DTO 보정
+  // 목록 타입 매핑
   private mapRawSummaryToDTO = (raw: OmdbRawMovieSummary): MovieSummaryDTO => {
     // DTO에서 정의한 규칙을 만족시키기 위한 로직
     const yearValue = parseInt(raw.Year, 10);
@@ -145,16 +147,91 @@ export class MovieRepository implements IMovieRepository {
     };
   };
 
+  // 어댑터 함수: RawDTO -> 내부 DTO 보정
+  // 상세정보 타입 매핑
   private mapRawDetailToDTO = (
     raw: OmdbRawMovieDetailResponse
   ): MovieDetailDTO => {
-    const yearValue = parseInt(raw.Year, 10);
+    // number 타입으로 파싱
+    const yearValue = this.safeParseInt(raw.Year);
+    const metascoreValue = this.safeParseInt(raw.Metascore);
+    const imdbVotesValue = this.safeParseInt(raw.imdbVotes);
+    
+    const imdbRatingRaw = !raw.imdbRating || raw.imdbRating === "N/A" ? null : parseFloat(raw.imdbRating);
+    const imdbRatingValue = imdbRatingRaw === null || isNaN(imdbRatingRaw) ? null : imdbRatingRaw;
+
+    const ratingsValue = raw.Ratings?.length ? raw.Ratings.map(this.mapRawRatingToDTO) : null;
+    const rawBoxOfficeValue = raw.BoxOffice;
+    let boxOfficeCleaned: string | null = null;
+    if(rawBoxOfficeValue && rawBoxOfficeValue !== "N/A") {
+      boxOfficeCleaned = rawBoxOfficeValue.replace(/[$,\s]/g, "");
+    }
 
     return {
-      movieId: raw.imdbId,
+      movieId: raw.imdbID,
       title: raw.Title,
-      year: yearValue,
+      year: yearValue !== null ? yearValue : 0,
       posterUrl: raw.Poster === "N/A" ? null : raw.Poster,
+      plot: raw.Plot,
+      director: raw.Director,
+      runtime: raw.Runtime,
+      actors: raw.Actors,
+      genre: raw.Genre,
+      language: raw.Language,
+      country: raw.Country,
+      rated: raw.Rated,
+      released: raw.Released,
+      writer: raw.Writer,
+      metascore: metascoreValue,
+      imdbVotes: imdbVotesValue,
+      ratings: ratingsValue,
+      imdbRating: imdbRatingValue,
+
+      // optional
+      boxOffice: boxOfficeCleaned,
+      production: raw.Production === "N/A" ? null : raw.Production,
+      website: raw.Website === "N/A" ? null : raw.Website,
     };
   };
+
+  // ratings 매핑 어댑터 함수
+  private mapRawRatingToDTO = (rawRating: OmdbRawRating):RatingDTO => {
+    let value: number | null = null;
+    let max = 0;
+
+    if(rawRating.Value !== "N/A") {
+      const parts = rawRating.Value.split("/");
+
+      if(rawRating.Value.includes("%")) {
+        value = this.safeParseInt(rawRating.Value.replace("%", ""));
+        max= 100;
+      } else if(parts.length === 2) {
+        value = parseFloat(parts[0]); // 평점은 소수점 허용
+
+        max = parseInt(parts[1], 10);
+        max = isNaN(max) ? 10 : max;
+
+        value = isNaN(value) ? null : value;
+      } else {
+        value = null;
+        max = 0;
+      }
+    }
+
+    return {
+      source: rawRating.Source,
+      value: value,
+      max: max,
+    };
+  };
+
+  // N/A 보정 함수
+  private safeParseInt = (value: string): number | null => {
+    if(value === "N/A" || !value) {
+      return null;
+    }
+    const cleanedValue = value.replace(/,/g, "");
+    const parsed = parseInt(cleanedValue, 10);
+    return isNaN(parsed) ? null : parsed;
+  }
 }

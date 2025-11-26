@@ -53,20 +53,17 @@ const MovieDetail = ({ onGoBack, onSearchTrigger }) => {
   }
 
   // 10점 만점 평점을 5점 만점(별점)으로 변환하는 함수
-  const getStarRating = (rating) => {
+  const getStarRating = (rating:number) => {
     // 10점 만점을 5점 만점으로 변환 (예: 8.8/10 -> 4.4/5)
-    const fiveStarRating = (parseFloat(rating) / 2).toFixed(1);
-    return fiveStarRating;
+    return (rating/2).toFixed(1);
   };
 
-  const starRating = getStarRating(details.imdbRating); // 4.4 / 5.0
+  const starRating = details.imdbRating !== null && undefined ? getStarRating(details.imdbRating) : 0; // 4.4 / 5.0
 
   const placeholderUrl =
     "https://placehold.co/200x300/444444/FFFFFF?text=No+Poster";
 
-  const genreText = Array.isArray(details.genres)
-    ? details.genres.join(" / ")
-    : details.genre || "장르 정보 없음";
+  const genreText = details.genres?.join(" / ") || "장르 정보 없음";
 
   // Backdrop URL이 없으면 포스터 URL을 배경 이미지로 사용
   const backgroundImageUrl =
@@ -187,7 +184,7 @@ const MovieDetail = ({ onGoBack, onSearchTrigger }) => {
                 {details.year} · {genreText}
               </p>
               <p className="detail-subtitle detail-sub-item">
-                {details.runtime} · {details.rated}
+                {details.runTimeFormatted || 'N/A'} · {details.rated}
               </p>
               <p className="detail-subtitle detail-sub-item">
                 {details.country}
@@ -254,11 +251,11 @@ const MovieDetail = ({ onGoBack, onSearchTrigger }) => {
             </div>
             <div className="staff-item">
               <span className="staff-role">배우</span>
-              <span className="staff-name">{details.actors}</span>
+              <span className="staff-name">{details.actors?.join(", ") || 'N/A'}</span>
             </div>
             <div className="staff-item">
               <span className="staff-role">개봉일</span>
-              <span className="staff-name">{details.released}</span>
+              <span className="staff-name">{details.releasedFormatted || 'N/A'}</span>
             </div>
             <div className="staff-item">
               <span className="staff-role">언어</span>
